@@ -1,106 +1,179 @@
 import 'package:flutter/material.dart';
+import 'login_screen.dart';
+import 'home_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+void main() {
+  runApp(SignUpApp());
+}
+
+class SignUpApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: SignUpScreen(), debugShowCheckedModeBanner: false);
+  }
+}
+
+class SignUpScreen extends StatefulWidget {
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 60),
-              const Text(
+              SizedBox(height: 30),
+              Text(
                 "Hi!",
-                style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                style: GoogleFonts.inknutAntiqua(
+                  fontSize: 55,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              const Text(
+              Text(
                 "Welcome",
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                "lets create your account",
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 30),
-
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: "Email Address",
-                  border: OutlineInputBorder(),
+                style: GoogleFonts.inknutAntiqua(
+                  fontSize: 55,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 16),
-
-              const TextField(
+              SizedBox(height: 8),
+              Text(
+                "   lets create your account",
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              SizedBox(height: 80),
+              TextField(
                 decoration: InputDecoration(
-                  labelText: "Name",
-                  border: OutlineInputBorder(),
+                  hintText: 'Email Address',
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
               ),
-              const SizedBox(height: 16),
-
-              const TextField(
-                obscureText: true,
+              SizedBox(height: 12),
+              TextField(
                 decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.visibility),
+                  hintText: 'Name',
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
               ),
-              const SizedBox(height: 16),
-
-              const TextField(
-                obscureText: true,
+              SizedBox(height: 12),
+              TextField(
+                obscureText: _obscurePassword,
                 decoration: InputDecoration(
-                  labelText: "Confirm Password",
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.visibility),
+                  hintText: 'Password',
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
                 ),
               ),
-              const SizedBox(height: 10),
-
-              const Text(
+              SizedBox(height: 12),
+              TextField(
+                obscureText: _obscureConfirmPassword,
+                decoration: InputDecoration(
+                  hintText: 'Confirm Password',
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureConfirmPassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
                 "Password must be at least 8 characters.",
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(fontSize: 12, color: Colors.grey[700]),
               ),
-              const SizedBox(height: 20),
-
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.white),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  minimumSize: Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
+                child: Text("Sign Up", style: TextStyle(color: Colors.white)),
               ),
-              const Spacer(),
-
+              Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account? "),
+                  Text(
+                    "Already have an account?",
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(
+                      Navigator.push(
                         context,
-                      ); // Assuming LoginScreen is the previous screen
+                        MaterialPageRoute(builder: (context) => LoginApp()),
+                      );
                     },
-                    child: const Text("Login"),
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
             ],
           ),
         ),
