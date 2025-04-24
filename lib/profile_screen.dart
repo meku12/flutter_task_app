@@ -16,12 +16,23 @@ class Profilescreen extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool isDarkMode = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Account'),
+        automaticallyImplyLeading: false,
+        title: Text(
+          '   My Account',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 1,
@@ -30,19 +41,31 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.grey[300],
-              child: Icon(Icons.person, size: 50, color: Colors.white),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'John Doe',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            Text(
-              'johndoe@example.com',
-              style: TextStyle(color: Colors.black54),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.grey[300],
+                  child: Icon(Icons.person, size: 50, color: Colors.white),
+                ),
+                SizedBox(width: 26),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'John Doe',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                      ),
+                    ),
+                    Text(
+                      'johndoe@example.com',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ],
+                ),
+              ],
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -54,12 +77,41 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Edit Profile'),
+              child: Text(
+                'Edit Profile',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
+            SizedBox(height: 20),
+
+            // Dark Mode toggle
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Dark Mode',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Switch(
+                  value: isDarkMode,
+                  onChanged: (val) {
+                    setState(() {
+                      isDarkMode = val;
+                    });
+                  },
+                ),
+              ],
+            ),
+
             SizedBox(height: 10),
-            ProfileButton(text: "dark mode", onTap: () {}),
-            SizedBox(height: 10),
-            ProfileButton(text: "Log Out", onTap: () {}),
+            ProfileButton(
+              text: "Log Out",
+              onTap: () {},
+              textStyle: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
@@ -85,7 +137,6 @@ class ProfileScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           }
-          // Do nothing for index 0 (Home) since you're already on it
         },
       ),
     );
@@ -95,8 +146,13 @@ class ProfileScreen extends StatelessWidget {
 class ProfileButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
+  final TextStyle? textStyle;
 
-  const ProfileButton({required this.text, required this.onTap});
+  const ProfileButton({
+    required this.text,
+    required this.onTap,
+    this.textStyle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +166,7 @@ class ProfileButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         alignment: Alignment.center,
-        child: Text(text, style: TextStyle(color: Colors.black)),
+        child: Text(text, style: textStyle ?? TextStyle(color: Colors.black)),
       ),
     );
   }

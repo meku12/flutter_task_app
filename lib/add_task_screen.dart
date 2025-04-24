@@ -1,120 +1,157 @@
 import 'package:flutter/material.dart';
 
-class TaskFormScreen extends StatefulWidget {
+void main() => runApp(TaskFormScreen());
+
+class TaskFormScreen extends StatelessWidget {
   @override
-  _TaskFormScreenState createState() => _TaskFormScreenState();
+  Widget build(BuildContext context) {
+    return MaterialApp(home: TaskForm(), debugShowCheckedModeBanner: false);
+  }
 }
 
-class _TaskFormScreenState extends State<TaskFormScreen> {
+class TaskForm extends StatefulWidget {
+  @override
+  _TaskFormState createState() => _TaskFormState();
+}
+
+class _TaskFormState extends State<TaskForm> {
   final _titleController = TextEditingController();
-  final _descController = TextEditingController();
-  final _dateController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  DateTime? _selectedDate;
+  String _priority = '';
 
-  String _selectedPriority = 'High';
-
-  Future<void> _pickDate() async {
-    DateTime? picked = await showDatePicker(
+  void _pickDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2020),
-      lastDate: DateTime(2100),
+      lastDate: DateTime(2101),
     );
-    if (picked != null) {
+    if (picked != null && picked != _selectedDate)
       setState(() {
-        _dateController.text = "${picked.toLocal()}".split(' ')[0];
+        _selectedDate = picked;
       });
-    }
-  }
-
-  Widget _buildPriorityButton(String priority) {
-    final isSelected = _selectedPriority == priority;
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => _selectedPriority = priority),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            color: isSelected ? Colors.black : Colors.grey[200],
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Center(
-            child: Text(
-              priority,
-              style: TextStyle(color: isSelected ? Colors.white : Colors.black),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Task Manager'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
-      ),
+      appBar: AppBar(title: Text('Task Manager')),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text("Task Title"),
+            SizedBox(height: 8),
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                labelText: 'Task Title',
-                hintText: 'Enter task title',
+                hintText: "Enter task title",
+                border: OutlineInputBorder(), // Makes it a rectangular box
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 12,
+                ),
               ),
             ),
+
             SizedBox(height: 12),
+            Text("Task Description"),
+            SizedBox(height: 8),
             TextField(
-              controller: _descController,
+              controller: _descriptionController,
               decoration: InputDecoration(
-                labelText: 'Task Description',
-                hintText: 'Enter task description',
+                hintText: "Enter task description",
+                border: OutlineInputBorder(), // Rectangular box
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 12,
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            Text('Priority'),
+
+            SizedBox(height: 12),
+            Text("Due Date"),
+            SizedBox(height: 8),
+            GestureDetector(
+              onTap: () => _pickDate(context),
+              child: AbsorbPointer(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText:
+                        _selectedDate == null
+                            ? "Pick a due date"
+                            : _selectedDate.toString().split(' ')[0],
+                    border: OutlineInputBorder(), // Rectangular box
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 12),
+            Text("Priority"),
             Row(
-              children: [
-                _buildPriorityButton('High'),
-                SizedBox(width: 8),
-                _buildPriorityButton('Medium'),
-                SizedBox(width: 8),
-                _buildPriorityButton('Low'),
-              ],
+              children:
+                  ['High', 'Medium', 'Low'].map((level) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: ChoiceChip(
+                        label: Text(level),
+                        selected: _priority == level,
+                        onSelected: (_) {
+                          setState(() {
+                            _priority = level;
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
             ),
-            SizedBox(height: 20),
-            Text('Due Date'),
-            TextField(
-              controller: _dateController,
-              readOnly: true,
-              onTap: _pickDate,
-              decoration: InputDecoration(hintText: 'Pick a due date'),
-            ),
-            Spacer(),
+            SizedBox(height: 24),
             Row(
               children: [
                 Expanded(
-                  child: OutlinedButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text('Cancel'),
+                  child: SizedBox(
+                    height: 48, // Increased height
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      onPressed: () {
+                        // Cancel logic
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Save logic
-                    },
-                    child: Text('Save'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
+                  child: SizedBox(
+                    height: 48, // Increased height
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      onPressed: () {
+                        // Save logic
+                      },
+                      child: Text(
+                        "Save",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
