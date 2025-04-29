@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'theme_manager.dart'; // Make sure this is the correct path
+import 'theme_manager.dart';
 
 class TaskDetailScreen extends StatelessWidget {
   final String title;

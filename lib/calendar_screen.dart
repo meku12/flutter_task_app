@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'theme_manager.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
-import 'detail_screen.dart'; // <-- Import your task detail screen
+import 'detail_screen.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override

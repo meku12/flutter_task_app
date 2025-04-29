@@ -5,6 +5,7 @@ import 'profile_screen.dart';
 import 'calendar_screen.dart';
 import 'detail_screen.dart';
 import 'add_task_screen.dart';
+import 'notificationscreen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -22,7 +23,24 @@ class HomeScreen extends StatelessWidget {
           ),
           centerTitle: false,
           elevation: 1,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 8.0), // 👈 smaller right padding
+              child: IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NotificationScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
+
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

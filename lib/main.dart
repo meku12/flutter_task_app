@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'theme_manager.dart'; // Your theme manager file
-import 'login_screen.dart'; // Your login screen
+import 'theme_manager.dart'; //  theme manager file
+import 'login_screen.dart'; //  login screen
 
 void main() {
   runApp(

@@ -90,7 +90,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginApp()),
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
                     ); // TODO: Navigate back to login screen
                   },
                   child: Text.rich(
