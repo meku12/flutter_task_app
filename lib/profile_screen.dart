@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'calendar_screen.dart';
 import 'home_screen.dart';
-import 'theme_manager.dart'; // Import your theme manager
+import 'theme_manager.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

@@ -36,7 +36,7 @@ class ThemeManager with ChangeNotifier {
     primarySwatch: Colors.indigo,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white, // ✅ white app bar in light mode
+      backgroundColor: Colors.white, //  white app bar in light mode
       foregroundColor: Colors.black,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -59,7 +59,7 @@ class ThemeManager with ChangeNotifier {
     primarySwatch: Colors.indigo,
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.black, // ✅ black app bar in dark mode
+      backgroundColor: Colors.black, //  black app bar in dark mode
       foregroundColor: Colors.white,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

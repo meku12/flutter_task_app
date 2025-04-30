@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'theme_manager.dart'; // Make sure this path is correct
+import 'theme_manager.dart';
 
 class NotificationScreen extends StatefulWidget {
   @override

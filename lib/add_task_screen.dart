@@ -52,7 +52,7 @@ class _TaskFormState extends State<TaskForm> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HomeScreen()),
-              ); // This goes back to the previous screen
+              ); //  go back to the previous screen
             },
           ),
         ),
@@ -68,7 +68,7 @@ class _TaskFormState extends State<TaskForm> {
                 controller: _titleController,
                 decoration: InputDecoration(
                   hintText: "Enter task title",
-                  border: OutlineInputBorder(), // Makes it a rectangular box
+                  border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 12,
                     horizontal: 12,
@@ -137,7 +137,7 @@ class _TaskFormState extends State<TaskForm> {
                 children: [
                   Expanded(
                     child: SizedBox(
-                      height: 48, // Increased height
+                      height: 48,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -157,7 +157,7 @@ class _TaskFormState extends State<TaskForm> {
                   SizedBox(width: 10),
                   Expanded(
                     child: SizedBox(
-                      height: 48, // Increased height
+                      height: 48,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           // backgroundColor: Colors.black,

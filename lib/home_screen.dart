@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           elevation: 1,
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 8.0), // 👈 smaller right padding
+              padding: EdgeInsets.only(right: 8.0),
               child: IconButton(
                 icon: Icon(Icons.notifications),
                 onPressed: () {
@@ -137,7 +137,6 @@ class HomeScreen extends StatelessWidget {
 
               Divider(color: Colors.grey, thickness: 1),
 
-              // Second Task
               GestureDetector(
                 onTap: () {
                   Navigator.push(

@@ -64,9 +64,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  // TODO: handle password reset
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   minimumSize: Size(double.infinity, 50),
@@ -91,7 +89,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),
-                    ); // TODO: Navigate back to login screen
+                    );
                   },
                   child: Text.rich(
                     TextSpan(
