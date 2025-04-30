@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'calendar_screen.dart';
 import 'home_screen.dart';
 import 'theme_manager.dart';
+import 'login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -96,7 +97,12 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 10),
               ProfileButton(
                 text: "Log Out",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
                 textStyle: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

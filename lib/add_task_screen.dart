@@ -52,7 +52,7 @@ class _TaskFormState extends State<TaskForm> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HomeScreen()),
-              ); //  go back to the previous screen
+              ); //  back to the previous screen
             },
           ),
         ),
@@ -68,7 +68,7 @@ class _TaskFormState extends State<TaskForm> {
                 controller: _titleController,
                 decoration: InputDecoration(
                   hintText: "Enter task title",
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(), //rectangular box
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 12,
                     horizontal: 12,
